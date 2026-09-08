@@ -1,0 +1,21 @@
+{
+  "name": "mcp-exchange-ovh",
+  "version": "1.0.0",
+  "description": "Serveur MCP pour Microsoft Exchange (EWS) via NTLM",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "test:manual": "node test-manual.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "dotenv": "^16.4.5",
+    "fast-xml-parser": "^4.5.0",
+    "httpntlm": "^1.8.13",
+    "zod": "^3.25.0"
+  },
+  "overrides": {
+    "underscore": "^1.13.8"
+  }
+}
