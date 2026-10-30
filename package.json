@@ -1,7 +1,7 @@
 {
   "name": "mcp-exchange-ovh",
-  "version": "1.0.0",
-  "description": "Serveur MCP pour Microsoft Exchange (EWS) via NTLM",
+  "version": "2.0.0",
+  "description": "Serveur MCP multi-utilisateurs pour Microsoft Exchange (EWS) via NTLM, accessible depuis Claude web et mobile",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -9,13 +9,18 @@
     "test:manual": "node test-manual.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
     "fast-xml-parser": "^4.5.0",
     "httpntlm": "^1.8.13",
     "zod": "^3.25.0"
   },
   "overrides": {
     "underscore": "^1.13.8"
+  },
+  "engines": {
+    "node": ">=22.13"
   }
 }

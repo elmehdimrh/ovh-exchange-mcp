@@ -1,12 +1,26 @@
 // Script de test manuel — pas de framework de test, juste des appels directs.
 // Usage: node test-manual.js <step>
-// step: search | get <itemId> | send | folders | update <itemId> | attachments <itemId> [attachmentId] | reply <itemId> | forward <itemId>
-const ews = require("./ews-client");
+// step: verify | search | get <itemId> | send | folders | update <itemId> | attachments <itemId> [attachmentId] | reply <itemId> | forward <itemId>
+// Identifiants lus depuis l'environnement local (EWS_URL, EWS_USERNAME, EWS_PASSWORD, EWS_DOMAIN).
+require("dotenv").config();
+const { createEwsClient } = require("./ews-client");
+
+const ews = createEwsClient({
+  ewsUrl: process.env.EWS_URL,
+  username: process.env.EWS_USERNAME,
+  password: process.env.EWS_PASSWORD,
+  domain: process.env.EWS_DOMAIN,
+});
 
 async function main() {
   const [step, ...args] = process.argv.slice(2);
 
   switch (step) {
+    case "verify": {
+      await ews.verifyCredentials();
+      console.log("Identifiants valides");
+      break;
+    }
     case "search": {
       const results = await ews.searchEmails("inbox", undefined, 5);
       console.log(JSON.stringify(results, null, 2));
@@ -48,7 +62,7 @@ async function main() {
       break;
     }
     default:
-      console.log("Usage: node test-manual.js <search|get|send|folders|update|attachments|reply|forward> [args...]");
+      console.log("Usage: node test-manual.js <verify|search|get|send|folders|update|attachments|reply|forward> [args...]");
   }
 }
 

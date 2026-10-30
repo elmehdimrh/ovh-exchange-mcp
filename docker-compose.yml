@@ -1,0 +1,20 @@
+# Pour Coolify (build pack "Docker Compose") : Traefik gère le HTTPS et le routage.
+# Dans Coolify, définir le domaine du service "app" avec le port : https://mcp.exemple.fr:3000
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      PUBLIC_URL: ${PUBLIC_URL}
+      EWS_URL: ${EWS_URL:-https://ex2.mail.ovh.net/EWS/Exchange.asmx}
+      EWS_DOMAIN: ${EWS_DOMAIN:-}
+      ALLOWED_DOMAINS: ${ALLOWED_DOMAINS}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ALLOWED_REDIRECT_URIS: ${ALLOWED_REDIRECT_URIS:-https://claude.ai/api/mcp/auth_callback,https://claude.com/api/mcp/auth_callback}
+    volumes:
+      - data:/app/data
+
+volumes:
+  data:
